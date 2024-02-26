@@ -17,12 +17,11 @@ public class JDBCExecutor {
             Connection connection= dcm.getConnection();
             CustomerDAO customerDAO=new CustomerDAO(connection);
             //update Data from Database
-            Customer customer=customerDAO.findById(100);
+            Customer customer=customerDAO.findById(102);
             System.out.println(customer.getFirstName()+" "+customer.getLastName()+" "+customer.getEmail());
             customer.setEmail("update it yet");
             customer=customerDAO.update(customer);
             System.out.println(customer.getFirstName()+" "+customer.getLastName()+" "+customer.getEmail());
-
 
 
 
