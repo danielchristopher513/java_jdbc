@@ -1,5 +1,6 @@
 package jdbc;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     private static final String UPDATE = "UPDATE customer SET first_name = ?, last_name=?, " +
             "email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ? WHERE customer_id = ?";
+
+    private static final String DELETE="DELETE FROM customer WHERE customer_id=?";
 
 
     public CustomerDAO(Connection connection) {
@@ -105,9 +108,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
             statement.setString(7,dto.getState());
             statement.setString(8,dto.getZipcode());
             statement.execute();
-
-            int id=this.getLastVal(CUSTOMER_SEQUENCE);
-            return this.findById(id);
+            return  null;
 
 
         }catch (SQLException exception){
@@ -121,6 +122,19 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     @Override
     public void delete(long id) {
+
+        int i;
+        Customer customer=new Customer();
+        try(PreparedStatement preparedStatement=this.connection.prepareStatement(DELETE);){
+
+            preparedStatement.setLong(1,id);
+            ResultSet resultSet=preparedStatement.executeQuery();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw  new RuntimeException(e);
+
+        }
 
     }
 }

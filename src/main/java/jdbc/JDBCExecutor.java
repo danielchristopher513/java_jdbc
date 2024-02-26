@@ -22,6 +22,7 @@ public class JDBCExecutor {
             customer.setEmail("update it yet");
             customer=customerDAO.update(customer);
             System.out.println(customer.getFirstName()+" "+customer.getLastName()+" "+customer.getEmail());
+            //customerDAO.delete(102);
 
 
 
